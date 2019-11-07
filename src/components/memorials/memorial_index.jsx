@@ -1,5 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router";
+import { MemorialIndexItem } from "./memorial_index_item";
 
 class MemorialIndex extends React.Component {
   constructor(props) {
@@ -7,8 +8,6 @@ class MemorialIndex extends React.Component {
     this.state = {
       sortedMemorials: null
     };
-    this.sortByLastName = this.sortByLastName.bind(this);
-    this.sortByDate = this.sortByDate.bind(this);
   }
 
   componentDidMount() {
@@ -16,50 +15,44 @@ class MemorialIndex extends React.Component {
   }
 
   componentDidUpdate() {
-    if (!this.state.sortedMemorials) this.sortByDate(this.props.memorials[0]);
+    if (!this.state.sortedMemorials) this.memorialSort("creationDate");
   }
 
   formatDate(date) {
     return new Date(date).toDateString();
   }
 
-  sortByDate() {
-    const sortedMemorialDatesArray = this.props.memorials[0].map(memorial => ({
+  createMemorialArray() {
+    // debugger;
+    return this.props.memorials[0].map(memorial => ({
       _id: memorial._id,
       creationDate: memorial.creationDate,
-      deceased: memorial.name.last + ", " + memorial.name.first
+      firstName: memorial.name.first,
+      middleName: memorial.name.middle,
+      lastName: !memorial.name.last ? "" : memorial.name.last
     }));
-
-    sortedMemorialDatesArray.sort((a, b) =>
-      a.creationDate > b.creationDate ? 1 : -1
-    );
-    const newState = {};
-    newState.sortedMemorials = sortedMemorialDatesArray.map(memorial => (
-      <li key={memorial._id}>
-        Memorial Creation Date: {this.formatDate(memorial.creationDate) + " "}
-        <br />
-        Name (Last Name First): {memorial.deceased}
-      </li>
-    ));
-    this.setState(newState);
   }
 
-  sortByLastName() {
-    const sortedMemorialNamesArray = this.props.memorials[0].map(memorial => ({
-      _id: memorial._id,
-      creationDate: memorial.creationDate,
-      deceased: memorial.name.last + ", " + memorial.name.first
-    }));
-
-    sortedMemorialNamesArray.sort((a, b) => (a.deceased > b.deceased ? 1 : -1));
-    const newState = {};
-    newState.sortedMemorials = sortedMemorialNamesArray.map(memorial => (
-      <li key={memorial._id}>
-        Memorial Creation Date: {this.formatDate(memorial.creationDate) + " "}
-        <br />
-        Name (Last Name First): {memorial.deceased}
-      </li>
+  createSortedListItems(sortedMemorialsArray) {
+    return sortedMemorialsArray.map(memorial => (
+      <MemorialIndexItem
+        key={memorial._id}
+        formatDate={this.formatDate}
+        memorial={memorial}
+      />
     ));
+  }
+
+  memorialSort(memorialKey) {
+    const sortedMemorialArray = this.createMemorialArray();
+    sortedMemorialArray.sort((a, b) => {
+      if(a[memorialKey] === '' && b[memorialKey] !== '') return 1
+      if(a[memorialKey] !== '' && b[memorialKey] === '') return -1
+      return a[memorialKey] > b[memorialKey] ? 1 : -1
+    }
+    );
+    const newState = {};
+    newState.sortedMemorials = this.createSortedListItems(sortedMemorialArray);
     this.setState(newState);
   }
 
@@ -67,13 +60,16 @@ class MemorialIndex extends React.Component {
     if (this.props.memorials.length === 0) return <span>"Loading Fam..."</span>;
 
     return (
-      <div>
+      <div className="memorial-sort-container">
+        <h1>Welcome to Memorial Sort!</h1>
         <ul>{this.state.sortedMemorials}</ul>
-        <button onClick={() => this.sortByLastName()}>Sort By Last Name</button>
+        <button onClick={() => this.memorialSort("lastName")}>
+          Sort By Last Name
+        </button>
         <br />
         <br />
-        <button onClick={() => this.sortByDate()}>
-          Sort By Date (default)
+        <button onClick={() => this.memorialSort("creationDate")}>
+          Sort By Date (Default)
         </button>
       </div>
     );
