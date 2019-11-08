@@ -4,13 +4,14 @@ export const MemorialIndexItem = ({ formatDate, memorial }) => {
   return (
     <li className="sorted-list-item">
       <p className="sorted-list-item-creationDate">
-        Memorial Creation Date: {formatDate(memorial.creationDate) + " "}
+        <b className="mobile-only-tags">Created On: </b>{" "}
+        {formatDate(memorial.creationDate) + " "}
       </p>
       <p className="sorted-list-item-lastName">
-        Last Name: {memorial.lastName}
+        <b className="mobile-only-tags">Last Name: </b> {memorial.lastName}
       </p>
       <p className="sorted-list-item-firstName">
-        First Name: {memorial.firstName}
+        <b className="mobile-only-tags">First Name: </b> {memorial.firstName}
       </p>
     </li>
   );

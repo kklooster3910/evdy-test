@@ -60,7 +60,7 @@ class MemorialIndex extends React.Component {
 
     return (
       <div className="memorial-sort-container">
-        <h1 className="memorial-sort-header">Welcome to Memorial Sort!</h1>
+        <h1 className="memorial-sort-header">Memorial Sort</h1>
         <div className="memorial-sort-button-container">
           <button
             id="button"
@@ -69,15 +69,23 @@ class MemorialIndex extends React.Component {
           >
             Sort By Last Name
           </button>
+          <div className="line-to-toggle"> | </div>
           <button
             id="button"
             className="sortby-date-button"
             onClick={() => this.memorialSort("creationDate")}
           >
-            Sort By Date (Default)
+            Sort By Date Created
           </button>
         </div>
-        <ul className="memorial-sort-ul">{this.state.sortedMemorials}</ul>
+        <ul className="memorial-sort-ul">
+          <li id="table-headers" className="sorted-list-item">
+            <p>Created On</p>
+            <p>Last Name</p>
+            <p>First Name</p>
+          </li>
+          {this.state.sortedMemorials}
+        </ul>
       </div>
     );
   }
