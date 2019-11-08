@@ -11,7 +11,9 @@ class MemorialIndex extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchMemorials();
+    this.props.fetchMemorials().then(() => {
+      this.props.resetErrors();
+    });
   }
   
   componentDidUpdate() {
@@ -43,16 +45,15 @@ class MemorialIndex extends React.Component {
     }
     
     memorialSort(memorialKey) {
-      const sortedMemorialArray = this.createMemorialArray();
-      sortedMemorialArray.sort((a, b) => {
-        if (a[memorialKey] === "" && b[memorialKey] !== "") return 1;
-        if (a[memorialKey] !== "" && b[memorialKey] === "") return -1;
-        return a[memorialKey] > b[memorialKey] ? 1 : -1;
-      });
-      const newState = {};
-      newState.sortedMemorials = this.createSortedListItems(sortedMemorialArray);
-      this.setState(newState);
-      this.props.resetErrors();
+    const sortedMemorialArray = this.createMemorialArray();
+    sortedMemorialArray.sort((a, b) => {
+      if (a[memorialKey] === "" && b[memorialKey] !== "") return 1;
+      if (a[memorialKey] !== "" && b[memorialKey] === "") return -1;
+      return a[memorialKey] > b[memorialKey] ? 1 : -1;
+    });
+    const newState = {};
+    newState.sortedMemorials = this.createSortedListItems(sortedMemorialArray);
+    this.setState(newState);
   }
 
   render() {
