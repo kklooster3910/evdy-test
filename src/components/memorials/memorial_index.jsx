@@ -46,11 +46,10 @@ class MemorialIndex extends React.Component {
   memorialSort(memorialKey) {
     const sortedMemorialArray = this.createMemorialArray();
     sortedMemorialArray.sort((a, b) => {
-      if(a[memorialKey] === '' && b[memorialKey] !== '') return 1
-      if(a[memorialKey] !== '' && b[memorialKey] === '') return -1
-      return a[memorialKey] > b[memorialKey] ? 1 : -1
-    }
-    );
+      if (a[memorialKey] === "" && b[memorialKey] !== "") return 1;
+      if (a[memorialKey] !== "" && b[memorialKey] === "") return -1;
+      return a[memorialKey] > b[memorialKey] ? 1 : -1;
+    });
     const newState = {};
     newState.sortedMemorials = this.createSortedListItems(sortedMemorialArray);
     this.setState(newState);
@@ -61,16 +60,24 @@ class MemorialIndex extends React.Component {
 
     return (
       <div className="memorial-sort-container">
-        <h1>Welcome to Memorial Sort!</h1>
-        <ul>{this.state.sortedMemorials}</ul>
-        <button onClick={() => this.memorialSort("lastName")}>
-          Sort By Last Name
-        </button>
-        <br />
-        <br />
-        <button onClick={() => this.memorialSort("creationDate")}>
-          Sort By Date (Default)
-        </button>
+        <h1 className="memorial-sort-header">Welcome to Memorial Sort!</h1>
+        <div className="memorial-sort-button-container">
+          <button
+            id="button"
+            className="sortby-lastName-button"
+            onClick={() => this.memorialSort("lastName")}
+          >
+            Sort By Last Name
+          </button>
+          <button
+            id="button"
+            className="sortby-date-button"
+            onClick={() => this.memorialSort("creationDate")}
+          >
+            Sort By Date (Default)
+          </button>
+        </div>
+        <ul className="memorial-sort-ul">{this.state.sortedMemorials}</ul>
       </div>
     );
   }

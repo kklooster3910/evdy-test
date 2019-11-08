@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Root from './components/root';
 import configureStore from './store/store';
-// import './index.css';
+import './index.scss';
 // import App from './components/app';
 // import * as serviceWorker from './serviceWorker';
 
