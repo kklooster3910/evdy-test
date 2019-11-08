@@ -26,7 +26,7 @@ class MemorialIndex extends React.Component {
     return this.props.memorials[0].map(memorial => ({
       _id: memorial._id,
       creationDate: memorial.creationDate,
-      firstName: memorial.name.first,
+      firstName: !memorial.name.first ? "" : memorial.name.first,
       middleName: memorial.name.middle,
       lastName: !memorial.name.last ? "" : memorial.name.last
     }));
@@ -76,6 +76,14 @@ class MemorialIndex extends React.Component {
             onClick={() => this.memorialSort("creationDate")}
           >
             Sort By Date Created
+          </button>
+          <div className="line-to-toggle"> | </div>
+          <button
+            id="button"
+            className="sortby-firstName-button"
+            onClick={() => this.memorialSort("firstName")}
+          >
+            Sort By First Name
           </button>
         </div>
         <ul className="memorial-sort-ul">
