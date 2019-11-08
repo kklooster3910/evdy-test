@@ -84,19 +84,23 @@ body {
   display: none;
 }
 
-@media only screen and (min-width: 500px) {
+@media only screen and (min-width: 550px) {
   .sorted-list-item {
     background-color: white;
     list-style-type: none;
     padding: 16px;
     display: flex;
-    flex-direction: row;
     justify-content: space-around;
+    list-style: none;
   }
 
   .memorial-sort-ul > li:nth-child(1) {
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
+  }
+
+  .sorted-list-item p {
+    width: 140px;
   }
 
   .memorial-sort-ul > li:nth-child(2) {
