@@ -13,17 +13,16 @@ class MemorialIndex extends React.Component {
   componentDidMount() {
     this.props.fetchMemorials();
   }
-
+  
   componentDidUpdate() {
     if (!this.state.sortedMemorials) this.memorialSort("creationDate");
   }
-
+  
   formatDate(date) {
     return new Date(date).toDateString();
   }
-
+  
   createMemorialArray() {
-    // debugger;
     return this.props.memorials[0].map(memorial => ({
       _id: memorial._id,
       creationDate: memorial.creationDate,
@@ -32,31 +31,32 @@ class MemorialIndex extends React.Component {
       lastName: !memorial.name.last ? "" : memorial.name.last
     }));
   }
-
+  
   createSortedListItems(sortedMemorialsArray) {
     return sortedMemorialsArray.map(memorial => (
       <MemorialIndexItem
-        key={memorial._id}
-        formatDate={this.formatDate}
-        memorial={memorial}
+      key={memorial._id}
+      formatDate={this.formatDate}
+      memorial={memorial}
       />
-    ));
-  }
-
-  memorialSort(memorialKey) {
-    const sortedMemorialArray = this.createMemorialArray();
-    sortedMemorialArray.sort((a, b) => {
-      if (a[memorialKey] === "" && b[memorialKey] !== "") return 1;
-      if (a[memorialKey] !== "" && b[memorialKey] === "") return -1;
-      return a[memorialKey] > b[memorialKey] ? 1 : -1;
-    });
-    const newState = {};
-    newState.sortedMemorials = this.createSortedListItems(sortedMemorialArray);
-    this.setState(newState);
+      ));
+    }
+    
+    memorialSort(memorialKey) {
+      const sortedMemorialArray = this.createMemorialArray();
+      sortedMemorialArray.sort((a, b) => {
+        if (a[memorialKey] === "" && b[memorialKey] !== "") return 1;
+        if (a[memorialKey] !== "" && b[memorialKey] === "") return -1;
+        return a[memorialKey] > b[memorialKey] ? 1 : -1;
+      });
+      const newState = {};
+      newState.sortedMemorials = this.createSortedListItems(sortedMemorialArray);
+      this.setState(newState);
+      this.props.resetErrors();
   }
 
   render() {
-    if (this.props.memorials.length === 0) return null;
+    if (!this.props.memorials.length) return null;
 
     return (
       <div className="memorial-sort-container">

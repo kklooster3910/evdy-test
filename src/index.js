@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import Root from './components/root';
 import configureStore from './store/store';
 import './index.scss';
+// import './nested_css.scss'
+
 // import App from './components/app';
 // import * as serviceWorker from './serviceWorker';
 
