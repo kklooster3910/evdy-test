@@ -3,7 +3,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Running Memorial Sort and About Memorial Sort
 
 Memorial sort allows you to view 10 memorials which are default sorted by the date they were created.
-There are options to sort by last name as well if you're interested in that order.
+There are options to sort by last name or first name as well if you're interested in that order.
 
 The app is mobile responsive and the css was built with mobile first in mind, resize the screen and use the dev tools to view how the app will look on mobile and large/small screens.
 
