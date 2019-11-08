@@ -1,3 +1,7 @@
+// not being imported to app, couldn't figure out to get the css exactly the same 
+// when nesting as when not nesting
+// leaving for review
+
 body {
   margin: 4px;
   font-family: "Cabin", sans-serif;
@@ -93,7 +97,7 @@ body {
     padding-right: 20px;
     display: table;
   }
-  
+
   .sorted-list-item {
     background-color: white;
     list-style-type: none;
