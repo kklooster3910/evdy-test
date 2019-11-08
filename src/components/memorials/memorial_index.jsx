@@ -56,7 +56,7 @@ class MemorialIndex extends React.Component {
   }
 
   render() {
-    if (this.props.memorials.length === 0) return <span>"Loading Fam..."</span>;
+    if (this.props.memorials.length === 0) return null;
 
     return (
       <div className="memorial-sort-container">
