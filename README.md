@@ -1,8 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Running Memorial Sort
-
-## About Memorial Sort
+## Running Memorial Sort and About Memorial Sort
 
 Memorial sort allows you to view 10 memorials which are default sorted by the date they were created.
 There are options to sort by last name as well if you're interested in that order.
@@ -13,11 +11,11 @@ The app is mobile responsive and the css was built with mobile first in mind, re
 
 Mobile Version - using Pixel 2 XL
 
-![Home Page](./mobile_screenshot)
+![Home Page](./mobile_screenshot.png)
 
 Desktop Version - 1080p Monitor
 
-![Home Page](./desktop_screenshot)
+![Home Page](./desktop_screenshot.png)
 
 Clone the repository to a local directory and navigate to the root folder.
 
